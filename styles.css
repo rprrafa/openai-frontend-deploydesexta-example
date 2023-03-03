@@ -1,0 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-family: 'IBM Plex Mono';
+    text-align: center;
+    margin-top: 3rem;
+    font-size: 1.8rem;
+}
+
+h1 span {
+    color: #0080ed;
+}
+
+form {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+input, button {
+    padding: .5rem 1rem;
+    border-radius: 8px;
+}
+
+input {
+    width: 400px;
+}
+
+button {
+    background-color: #0080ed;
+    color: #ffffff;
+    border: 1px solid #0080ed;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+#response {
+    max-width: 400px;
+    margin: 1.5rem auto;
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha IA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <h1>
+        A inteligência StartSe<br><span>para apoiá-lo no dia a dia_</span>
+    </h1>
+    <form>
+        <input id="question" name="question" type="text" placeholder="Como posso ajudar?" maxlength="255" required />
+        <button>
+            Buscar
+        </button>
+    </form>
+    <p id="response"></p>
+
+    <script>
+        const searchQueryParams = new URLSearchParams(window.location.search);
+        const questionFromQueryParams = searchQueryParams.get('question');
+
+        const handleSearch = (question) => {
+            const API_URL = 'http://localhost:8000';
+
+            Swal.fire({
+                title: 'Por favor aguarde...',
+                html: `Estou analisando a resposta para <strong>${question}</strong>`,
+                didOpen: () => {
+                    Swal.showLoading()
+                },
+            });
+
+            fetch(`${API_URL}/search?question=${question}`)
+                .then(response => response.json())
+                .then(responseJson => {
+                    const { answer } = responseJson;
+                    const responseElement = document.querySelector('#response');
+                    responseElement.innerHTML = answer;
+                    Swal.close();
+                });
+        }
+
+        if (questionFromQueryParams) handleSearch(questionFromQueryParams);
+    </script>
+</body>
+</html>
